@@ -1,0 +1,91 @@
+<?php
+/**
+ * This is opauth strategy configuration file.
+ *
+ * @var PC_core $core
+ * @var string $pluginName
+ */
+ 
+return array(
+/*
+	'Disqus' => array(
+		'api_key'    => 'YOUR API KEY',
+		'api_secret' => 'YOUR API SECRET',
+	),
+*/
+
+/*
+	'Facebook' => array(
+		'app_id' => 'YOUR APP ID',
+		'app_secret' => 'YOUR APP SECRET',
+	),
+*/
+
+/*
+	'Flickr' => array(
+		'key' => 'YOUR APP KEY',
+		'secret' => 'YOUR APP SECRET',
+	),
+*/
+
+/*
+	'GitHub' => array(
+		'client_id' => 'YOUR CLIENT ID',
+		'client_secret' => 'YOUR CLIENT SECRET',
+	),
+*/
+
+/*
+	'Google' => array(
+		'client_id' => 'YOUR CLIENT ID',
+		'client_secret' => 'YOUR CLIENT SECRET',
+	),
+*/
+
+/*
+	'Instagram' => array(
+		'client_id' => 'YOUR CLIENT ID',
+		'client_secret' => 'YOUR CLIENT SECRET',
+	),
+*/
+
+/*
+	'LinkedIn' => array(
+		'api_key' => 'YOUR API KEY',
+		'secret_key' => 'YOUR SECRET KEY',
+	),
+*/
+
+/*
+	'Live' => array(
+		'client_id' => 'YOUR CLIENT ID',
+		'client_secret' => 'YOUR CLIENT SECRET',
+	),
+*/
+
+/*
+	'OpenID' => array(), // does not require configuration (see readme of OpenID strategy)
+*/
+
+/*
+	'Twitter' => array(
+		'key' => 'YOUR CONSUMER KEY',
+		'secret' => 'YOUR CONSUMER SECRET',
+	),
+*/
+
+/*
+	'Vimeo' => array(
+		'key' => 'YOUR CONSUMER KEY',
+		'secret' => 'YOUR CONSUMER SECRET',
+	),
+*/
+
+/*
+	'VKontakte' => array(
+		'app_id' => 'YOUR APP ID',
+		'app_secret' => 'YOUR APP SECRET',
+	),
+*/
+
+);
