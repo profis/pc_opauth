@@ -36,4 +36,52 @@ function pc_opauth_install() {
 	$core->Set_variable_if('lt', 'OPAuth.error_invalid_auth_response', 'Blogas autentifikacijos atsakymas', 'pc_opauth');
 	$core->Set_variable_if('lt', 'OPAuth.error_authentication_error', 'Autentifikacijos klaida', 'pc_opauth');
 	$core->Set_variable_if('lt', 'OPAuth.error_unsupported', 'Šis prisijungimo būdas nepalaikomas', 'pc_opauth');
+
+	$core->Set_config_if('strategy_order', 'Disqus,Facebook,Flickr,GitHub,Google,Instagram,LinkedIn,Live,OpenID,Twitter,Vimeo,VKontakte', 'pc_opauth');
+
+	$core->Set_config_if('disqus_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('disqus_api_key', '', 'pc_opauth');
+	$core->Set_config_if('disqus_api_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('facebook_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('facebook_app_id', '', 'pc_opauth');
+	$core->Set_config_if('facebook_app_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('flickr_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('flickr_key', '', 'pc_opauth');
+	$core->Set_config_if('flickr_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('github_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('github_client_id', '', 'pc_opauth');
+	$core->Set_config_if('github_client_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('google_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('google_client_id', '', 'pc_opauth');
+	$core->Set_config_if('google_client_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('instagram_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('instagram_client_id', '', 'pc_opauth');
+	$core->Set_config_if('instagram_client_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('linkedin_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('linkedin_api_key', '', 'pc_opauth');
+	$core->Set_config_if('linkedin_secret_key', '', 'pc_opauth');
+
+	$core->Set_config_if('live_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('live_client_id', '', 'pc_opauth');
+	$core->Set_config_if('live_client_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('twitter_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('twitter_key', '', 'pc_opauth');
+	$core->Set_config_if('twitter_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('vimeo_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('vimeo_key', '', 'pc_opauth');
+	$core->Set_config_if('vimeo_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('vkontakte_enabled', '0', 'pc_opauth');
+	$core->Set_config_if('vkontakte_app_id', '', 'pc_opauth');
+	$core->Set_config_if('vkontakte_app_secret', '', 'pc_opauth');
+
+	$core->Set_config_if('openid_enabled', '0', 'pc_opauth');
 }

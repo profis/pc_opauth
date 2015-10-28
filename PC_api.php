@@ -15,15 +15,37 @@ $route = $routes->Get(1);
 function pc_plugin_pc_opauth_init($run = true) {
 	global $core;
 
+	$cfg = $core->cfg['pc_opauth'];
 	$pluginName = basename(dirname(__FILE__));
 
-	$strategies = require(dirname(__FILE__) . '/config.strategies.php');
+	$strategies = array();
+	$strategyIndex = array();
+	$strategyDir = dirname(__FILE__) .'/lib/opauth/Strategy';
+	$dir = @opendir($strategyDir);
+	if( $dir ) {
+		while( ($f = readdir($dir)) !== false ) {
+			if( $f[0] == '.' || !is_dir($strategyDir . '/' . $f) )
+				continue;
+			$prefix = strtolower($f) . '_';
+			if( !isset($cfg["{$prefix}enabled"]) || !$cfg["{$prefix}enabled"] )
+				continue;
+			$strategyIndex[$prefix] = $f;
+			$strategies[$f] = array();
+		}
+		closedir($dir);
+	}
+
+	foreach($cfg as $k => $v) {
+		if( !preg_match('#^([^_]+_)(.*)$#', $k, $mtc) || !isset($strategyIndex[$mtc[1]]) )
+			continue;
+		$strategies[$strategyIndex[$mtc[1]]][$mtc[2]] = $v;
+	}
 
 	$config = array(
-		'path' => '/' . $core->Get_rel_path('root', 'api/plugin/' . $pluginName . '/auth/'), // this is used only while Opauth::run() is called (only during authentication) so everything that goes after that path in url is parsed into strategy name and its parameters
+		'path' => \Profis\Web\Url::$basePath . $core->Get_rel_path('root', 'api/plugin/' . $pluginName . '/auth/'), // this is used only while Opauth::run() is called (only during authentication) so everything that goes after that path in url is parsed into strategy name and its parameters
 		'complete_path' => $core->Get_url('root', 'api/plugin/' . $pluginName . '/auth/'), // not sure if it is used for any other reasons than to display an error
 		'callback_url' => $core->Get_url('root', 'api/plugin/' . $pluginName . '/callback/'),
-		'salt' => 'pc_opauth$' . $core->cfg['salt'],
+		'security_salt' => 'pc_opauth$' . $core->cfg['salt'],
 		'callback_transport' => 'session',
 		'debug' => true,
 		'security_iteration' => 300,
@@ -41,7 +63,8 @@ switch ($route) {
 		$response = null;
 		switch($opauth->env['callback_transport']) {
 			case 'session':
-				session_start();
+				if( !session_id() )
+					session_start();
 				$response = $_SESSION['opauth'];
 				unset($_SESSION['opauth']);
 				break;

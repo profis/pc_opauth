@@ -6,15 +6,19 @@
 function pc_plugin_pc_opauth_register_strategies($params) {
 	global $core;
 
+	$cfg = $core->cfg['pc_opauth'];
 	$pluginName = basename(dirname(__FILE__));
 
-	$strategies = require(dirname(__FILE__) . '/config.strategies.php');
+	foreach( explode(',', $cfg['strategy_order']) as $strategyClass ) {
+		$strategyClass = trim($strategyClass);
+		$strategyId = strtolower($strategyClass);
+		if( !isset($cfg["{$strategyId}_enabled"]) || !$cfg["{$strategyId}_enabled"] )
+			continue;
 
-	foreach( $strategies as $strategyId => $strategy ) {
-		$strategyPath = isset($strategy['strategy_url_name']) ? $strategy['strategy_url_name'] : strtolower($strategyId);
-		$params['list'][$strategyId] = array(
+		$strategyPath = isset($cfg["{$strategyId}_strategy_url_name"]) ? $cfg["{$strategyId}_strategy_url_name"] : $strategyId;
+		$params['list'][$strategyClass] = array(
 			'url' => $core->Get_url('root', 'api/plugin/' . $pluginName . '/auth/' . $strategyPath . '/'),
-			'name' => $core->Get_variable('OPAuth.' . $strategyId, null, 'pc_opauth'),
+			'name' => $core->Get_variable('OPAuth.' . $strategyClass, null, 'pc_opauth'),
 		);
 	}
 }
