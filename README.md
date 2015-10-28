@@ -8,9 +8,8 @@ How to make it work?
 
 To make pc_opauth plug-in work you have to:
 
-1. Copy or rename config.stragies.php.sample file to config.strategies.php
-2. Uncomment and fill in configuration specific for each strategy in config.strategies.php
-3. Activate plug-ins site_users and pc_opauth via admin area module manager
+1. Activate plug-ins site_users and pc_opauth via admin area module manager
+2. Fill in strategy specific configuration (API credentials) and set "enabled" for each needed strategy to "1" in admin area "Settings" module.
 
 After all steps are done, **PC_user::getExternalAuthenticators()** static method should return authentication strategies (names and URLs)
 supported by this plug-in. You can add ?redirect=...someUrl... to provided URLs in order for this plug-in to redirect users to specific
