@@ -41,6 +41,14 @@ function pc_plugin_pc_opauth_init($run = true) {
 		$strategies[$strategyIndex[$mtc[1]]][$mtc[2]] = $v;
 	}
 
+	// Forcing authentication is strategy dependent and not supported by all strategies
+	if( isset($_REQUEST['force_login']) && $_REQUEST['force_login'] ) {
+		if( isset($strategies['Facebook']) )
+			$strategies['Facebook']['auth_type'] = 'reauthenticate';
+		if( isset($strategies['Twitter']) )
+			$strategies['Facebook']['force_login'] = 'true';
+	}
+
 	$config = array(
 		'path' => \Profis\Web\Url::$basePath . $core->Get_rel_path('root', 'api/plugin/' . $pluginName . '/auth/'), // this is used only while Opauth::run() is called (only during authentication) so everything that goes after that path in url is parsed into strategy name and its parameters
 		'complete_path' => $core->Get_url('root', 'api/plugin/' . $pluginName . '/auth/'), // not sure if it is used for any other reasons than to display an error
